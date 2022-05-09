@@ -20,8 +20,8 @@ int main(void) {
 	irqInit();
 	irqEnable(IRQ_VBLANK);
 	//and here i create our first cell for manipulation
-	int bfvar
-	bfvar = 0
+	int bfvar;
+	bfvar = 0;
 	consoleDemoInit();
 
 	// ansi escape sequence to set print co-ordinates
@@ -29,19 +29,31 @@ int main(void) {
 	iprintf("\x1b[1;1HHello World!\n");
 do {
 	int keys_pressed, keys_released;
-	int bfvar
 	scanKeys();
 	keys_pressed = keysDown();
 	keys_released = keysUp();
 	VBlankIntrWait();
+	//key checking within, a increases, b decreses, select clears.
+	//value updates everytime either a or b is released.
 	if ( keys_pressed & KEY_A ) {
-		bfvar = bfvar + 1
+		bfvar = bfvar + 1;
 	}
-	if (keys_released & KEY_A ) {
-		iprintf("\x1b[10;10HCurrent Value is: %d
-	while (1) {
-		VBlankIntrWait();
+	if ( keys_released & KEY_A ) {
+		iprintf("\x1b[2J");
+		iprintf("\x1b[10;10HCurrent Value is: %d", bfvar);
 	}
+	if ( keys_pressed & KEY_B ) {
+		bfvar = bfvar - 1;
+	}
+	if ( keys_released & KEY_B ) {
+		iprintf("\x1b[2J");
+		iprintf("\x1b[10;10HCurrent Value is: %d", bfvar);
+	}
+	if ( keys_pressed & KEY_SELECT ) {
+		bfvar = 0;
+	}
+
+	} while (1);
 }
 
 
