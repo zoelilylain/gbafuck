@@ -19,9 +19,10 @@ int main(void) {
 	// is required
 	irqInit();
 	irqEnable(IRQ_VBLANK);
-	//and here i create our first cell for manipulation
-	int bfvar;
-	bfvar = 0;
+	//and here i create our cell array
+	int bfvar[100];
+	int curbfvar;
+	curbfvar = 0;
 	consoleDemoInit();
 
 	// ansi escape sequence to set print co-ordinates
@@ -36,25 +37,37 @@ do {
 	//key checking within, a increases, b decreses, select clears.
 	//value updates everytime either a or b is released.
 	if ( keys_pressed & KEY_A ) {
-		bfvar = bfvar + 1;
+		bfvar[curbfvar] = bfvar[curbfvar] + 1;
 	}
 	if ( keys_released & KEY_A ) {
 		iprintf("\x1b[2J");
-		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
+		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar[curbfvar]);
 	}
 	if ( keys_pressed & KEY_B ) {
-		bfvar = bfvar - 1;
+		bfvar[curbfvar] = bfvar[curbfvar] - 1;
 	}
 	if ( keys_released & KEY_B ) {
 		iprintf("\x1b[2J");
-		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
+		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar[curbfvar]);
 	}
 	if ( keys_pressed & KEY_SELECT ) {
-		bfvar = 0;
+		bfvar[curbfvar] = 0;
 	}
 	if ( keys_released & KEY_SELECT ) {
 		iprintf("\x1b[2J");
-                iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
+                iprintf("\x1b[1;1HCurrent Value is: %d", bfvar[curbfvar]);
+	}
+	if ( keys_pressed & KEY_R ) {
+		curbfvar = curbfvar + 1;
+	}
+	if (keys_released & KEY_R ) {
+		iprintf("\x1b[2;1HCurrent Cell is Cell: %d", curbfvar);
+	}
+	if ( keys_pressed & KEY_L ) {
+		curbfvar = curbfvar - 1;
+	}
+	if ( keys_released & KEY_L ) {
+		iprintf("\x1b[2;1HCurrent Cell is Cell: %d", curbfvar);
 	}
 
 	} while (1);
