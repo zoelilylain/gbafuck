@@ -23,19 +23,22 @@ int main(void) {
 	int bfvar[100];
 	int curbfvar;
 	curbfvar = 0;
+	//curbfvar controls the current position of the pointer. this is used to mark in which cell the change should be made.
 	consoleDemoInit();
 
 	// ansi escape sequence to set print co-ordinates
 	// /x1b[line;columnH
 	iprintf("\x1b[1;1HReady for input!\n");
+	//let user know we are ready for live interpretation
 do {
 	int keys_pressed, keys_released;
 	scanKeys();
 	keys_pressed = keysDown();
 	keys_released = keysUp();
+	//setup key scanning so we know what buttons the user is pressing
 	VBlankIntrWait();
-	//key checking within, a increases, b decreses, select clears.
-	//value updates everytime either a or b is released.
+	//key checking within, a increases, b decreses, select clears, r moves to the right, l to the left. start outputs.
+	//value updates everytime either a or b is released, and cell postion updates similarly with r and l.
 	if ( keys_pressed & KEY_A ) {
 		bfvar[curbfvar] = bfvar[curbfvar] + 1;
 	}
@@ -69,7 +72,14 @@ do {
 	if ( keys_released & KEY_L ) {
 		iprintf("\x1b[2;1HCurrent Cell is Cell: %d", curbfvar);
 	}
-
+	if ( keys_pressed & KEY_START ) {
+		iprintf("\x1b[3;1HCurrent Cell contents: %d", bfvar[curbfvar];
+	}
+	//if ( keys_pressed & KEY_LEFT ) {
+	//if ( keys_pressed & KEY_RIGHT ) {
+	//if ( keys_pressed & KEY_UP ) {
+	//if ( keys_pressed & KEY_DOWN ) {
+	//put brainfuck code to execute under one of the above if statements, then uncomment the if statement
 	} while (1);
 }
 
