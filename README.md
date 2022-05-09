@@ -10,3 +10,6 @@ A adds, B subtracts, Select clears.
 
 ## Warning!
 This is heavily WIP! There is only one memory cell at the moment! Most commands are missing!
+
+## Thanks
+The DevKitPro team, for providing example code and, well, the devkit.
