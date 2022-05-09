@@ -73,7 +73,7 @@ do {
 		iprintf("\x1b[2;1HCurrent Cell is Cell: %d", curbfvar);
 	}
 	if ( keys_pressed & KEY_START ) {
-		iprintf("\x1b[3;1HCurrent Cell contents: %d", bfvar[curbfvar];
+		iprintf("\x1b[3;1HCurrent Cell contents: %d", bfvar[curbfvar]);
 	}
 	//if ( keys_pressed & KEY_LEFT ) {
 	//if ( keys_pressed & KEY_RIGHT ) {
