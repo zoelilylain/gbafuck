@@ -26,7 +26,7 @@ int main(void) {
 
 	// ansi escape sequence to set print co-ordinates
 	// /x1b[line;columnH
-	iprintf("\x1b[1;1HHello World!\n");
+	iprintf("\x1b[1;1HReady for input!\n");
 do {
 	int keys_pressed, keys_released;
 	scanKeys();
@@ -40,17 +40,21 @@ do {
 	}
 	if ( keys_released & KEY_A ) {
 		iprintf("\x1b[2J");
-		iprintf("\x1b[10;10HCurrent Value is: %d", bfvar);
+		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
 	}
 	if ( keys_pressed & KEY_B ) {
 		bfvar = bfvar - 1;
 	}
 	if ( keys_released & KEY_B ) {
 		iprintf("\x1b[2J");
-		iprintf("\x1b[10;10HCurrent Value is: %d", bfvar);
+		iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
 	}
 	if ( keys_pressed & KEY_SELECT ) {
 		bfvar = 0;
+	}
+	if ( keys_released & KEY_SELECT ) {
+		iprintf("\x1b[2J");
+                iprintf("\x1b[1;1HCurrent Value is: %d", bfvar);
 	}
 
 	} while (1);
