@@ -20,7 +20,7 @@ int main(void) {
 	irqInit();
 	irqEnable(IRQ_VBLANK);
 	//and here i create our cell array
-	int bfvar[100];
+	int bfvar[30000];
 	int curbfvar;
 	curbfvar = 0;
 	//curbfvar controls the current position of the pointer. this is used to mark in which cell the change should be made.
